@@ -2,11 +2,20 @@
 .titleText{
     color:#232629;
     font-size: 1.5rem;
-    line-height: 35px;
     margin: 24px 0px 27px;
     font-weight: 600;
+    display: inline-block;
 }
 
+.askBtn{
+    background-color: #0A95FF;
+    cursor: pointer;
+    color: #fff;
+    border-style: none;
+    border-radius: 3px;
+    padding: 8px 20px;
+    margin-left: 50px;
+}
 .guideDiv{
     background-color: #EBF4FB;
     border: 1px solid #A6CEED;
@@ -27,6 +36,7 @@
     line-height: 20px;
     font-weight: 400;
 }
+
 
 .guideListTitle{
     font-size: 0.8rem;
@@ -73,7 +83,7 @@ ul{
     width: 70%;
     display: flex;
     justify-content: space-between;
-    margin: 20px 40px 30px 40px;
+    margin: 20px 40px 90px 40px;
 }
 
 .cancelBtn{
@@ -92,8 +102,77 @@ ul{
     border-radius: 3px;
 }
 
-.empty{
-    width: 400px;
-    height: 400px;
+.questionsDiv{
+    background-color: #FDF7E2;
+    width: 70%;
+    margin: 40px;
+    padding-top: 10px;
 }
 
+.answers{
+    display: flex;
+    flex-direction: column;
+}
+
+.ansAuthor{
+    margin: 15px;
+    padding: 10px;
+    border-radius: 3px;
+    outline: #0A95FF;
+    border-style: none;
+}
+
+#answer{
+    margin: 15px;
+    border-radius: 3px;
+    outline: #0A95FF;
+    border-style: none;
+}
+
+#answer::placeholder{
+    padding: 5px;
+}
+
+.answerBtn{
+    margin: 10px 20px;
+    padding: 4px 10px;
+    border-style: none;
+    background-color: #FDF7E2;
+    border: 1px solid #000;
+    
+}
+
+.postAns{
+    width: 80px;
+    padding: 5px;
+    margin: 10px 20px;
+}
+
+#btn{
+    width: 80px;
+    padding: 5px;
+    margin: 10px 20px;
+    display: inline-block;
+}
+
+.quizItem{
+    margin: 5px 9px;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 3px;
+    list-style-type: disc;
+}
+
+.quizAuthor{
+    margin: 5px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 3px;
+}
+
+.ansItem{
+    margin: 5px 9px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 3px;
+}

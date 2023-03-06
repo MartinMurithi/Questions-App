@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../QuizInput/QuizInput.css";
 
 function QuizInput() {
@@ -8,7 +8,10 @@ function QuizInput() {
   const [answer, setAnswer] = useState("");
   const [ansAuthor, setAnsAuthor] = useState("");
   const [displayAnsInput, setDisplayAnsInput] = useState(false);
-  const [viewReplies, setViewReplies] = useState(false);
+  const [viewAnswer, setViewAnswer] = useState(false);
+  const [displayAskQuestion, setAskQuestion] = useState(false);
+  const [displayViewQuestions, setViewQuestion] = useState(false);
+  const [post, setPost] = useState(false);
 
   const handleQuizAuthor = (e) => {
     setQuizAuthor(e.target.value);
@@ -44,9 +47,11 @@ function QuizInput() {
     const question = {
       id: Math.round(Math.random() * 10000),
       question: quiz,
-      author: quizAuthor
-      
+      owner: quizAuthor,
+      answer: answer,
+      answerAuthor: ansAuthor
     };
+    
     setQuizList([...quizList, question]);
     setQuizAuthor("");
     setQuiz("");
@@ -70,31 +75,57 @@ function QuizInput() {
 
   const handleAnswer = (event) => {
     setAnswer(event.target.value);
-  }
+  };
 
-  const handleAddAns = () => {
+  const postAnswer = (id) => {
     quizList.map(item => {
-      item.answer = answer;
-      item.ansAuthor = ansAuthor
+      if (item.id === id) {
+        console.log("anything");
+        item.answerAuthor= ansAuthor;
+        item.answer = answer;
+        console.log(answer);
+        console.log(quizList);
+      }
     })
-    setQuizList([...quizList]);
-    console.log(quizList);
+    setAnsAuthor("");
+    setAnswer("");
+    setPost(!post)
   }
 
-  const handleToggleAns = (id) => {
-    quizList.map(item => {
-      if (id === item.id) {
+  const handleAnswerQuestion = (id) => {
+    quizList.map((item) => {
+      if (item.id === id) {
         setDisplayAnsInput(!displayAnsInput);
       }
-      
-    })
-    
+    });
   };
+
+  const askQuestionBtn = () => {
+    setAskQuestion(!displayAskQuestion);
+  };
+
+  const viewQuestionsBtn = () => {
+    setViewQuestion(!displayViewQuestions);
+  };
+
+  const handleViewAns = (id) => {
+    setViewAnswer(!viewAnswer);
+  }
+
+  useEffect(() => {
+    console.log(45);
+  }, [quizList])
 
   return (
     <>
       <div className="title">
         <h3 className="titleText">Ask a public question</h3>
+        <button className="askBtn" onClick={askQuestionBtn}>
+          Ask a Question
+        </button>
+        <button className="askBtn" onClick={viewQuestionsBtn}>
+          View Questions
+        </button>
       </div>
 
       <div className="guideDiv">
@@ -119,92 +150,103 @@ function QuizInput() {
           </li>
         </ul>
       </div>
-      <div className="inputs">
-        <input
-          type="text"
-          placeholder="Enter your name"
-          className="authorName"
-          value={quizAuthor}
-          onChange={handleQuizAuthor}
-        />
-        <textarea
-          name=""
-          className="quizBox"
-          cols="30"
-          rows="10"
-          placeholder="Ask Question"
-          value={quiz}
-          onChange={handleQuiz}
-        ></textarea>
-      </div>
-      <div className="btns">
-        <button className="cancelBtn">Cancel</button>
-        <button className="postBtn" onClick={addQuestions}>
-          Post
-        </button>
-      </div>
-      <div className="empty">
-        {quizList.map((elm) => {
-          return (
-            <div className="dataQuiz">
-              {/* QUESTION */}
-              <h3 key={elm.id} className="quizItem">
-                {elm.question}
-              </h3>
-              <h3 className="authorName">{elm.author}</h3>
-
-              {/* ANSWER QUESTION BTN */}
-              <button className="answer" onClick={() => { handleToggleAns(elm.id) }}>
-                Answer
-              </button>
-              {/* DELETE QUESTION BTN */}
-              <button
-                className="delete"
-                onClick={() => {
-                  handleDelete(elm.id);
-                }}
-              >
-                Delete
-              </button>
-              {/* EDIT QUESTION BTN */}
-              <button
-                className="edit"
-                onClick={() => {
-                  handleEditQuiz(elm.id);
-                }}
-              >
-                Edit
-              </button>
-              {/* HIDE/VIEW ANSWER */}
-              <button className="showAns">View Answers</button>
-              {/* INPUTS TO ANSWER A QUESTION */}
-              {displayAnsInput ? (
-                <div className="answers">
-                  <input
-                    type="text"
-                    value={ansAuthor}
-                    className="ansAuthor"
-                    placeholder="Enter your name"
-                    onChange={handleAnsAuthor}
-                  />
-                  <textarea
-                    name=""
-                    id="answer"
-                    cols="30"
-                    rows="10"
-                    placeholder="Enter your answer"
-                    onChange={handleAnswer}
-                  ></textarea>
-                  <button className="cancelAns">Cancel</button>
-                  {/* EDIT ANS BTN */}
-                  <button className="editAns">Edit</button>
-                  {/* POST ANS BTN */}
-                  <button className="postAns" onClick={handleAddAns}>Post</button>
-                </div>
-              ) : null}
+      <div>
+        {displayAskQuestion ? (
+          <div>
+            <div className="inputs">
+              <input
+                type="text"
+                placeholder="Enter your name"
+                className="authorName"
+                value={quizAuthor}
+                onChange={handleQuizAuthor}
+              />
+              <textarea
+                name=""
+                className="quizBox"
+                cols="30"
+                rows="10"
+                placeholder="Ask Question"
+                value={quiz}
+                onChange={handleQuiz}
+              ></textarea>
             </div>
-          );
-        })}
+
+            <div className="btns">
+              <button className="cancelBtn">Cancel</button>
+              <button className="postBtn" onClick={addQuestions}>
+                Post
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {/* VIEW ALL QUESTIONS */}
+        {displayViewQuestions ? (
+          <div className="questionsDiv">
+              {
+                quizList.map((elm) => {
+                  return (
+                    <div className="dataQuiz">
+                      {/* QUESTION */}
+                      <p key={elm.id} className="quizItem">{elm.question}</p>
+                      <p className="asnItem">`Ans : {elm.answer}`</p>
+                  <p className="quizAuthor">{elm.author}</p>
+
+                  {/* ANSWER QUESTION BTN */}
+                  <button className="answerBtn" onClick={() => { handleAnswerQuestion(elm.id) }}>Answer</button>
+                  {displayAnsInput ? 
+                    <div className="answers">
+                      <input
+                        type="text"
+                        value={ansAuthor}
+                        className="ansAuthor"
+                        placeholder="Enter your name"
+                        onChange={handleAnsAuthor}
+                      />
+                      <textarea
+                        name=""
+                        id="answer"
+                        cols="30"
+                        rows="10"
+                        placeholder="Enter your answer"
+                        onChange={handleAnswer}
+                      ></textarea>
+                      {/* POST ANS BTN */}
+                      <button className="postAns" onClick={() => { postAnswer(elm.id) }}>
+                        Post
+                      </button>
+                    </div>
+                   : null}
+                  {/* DELETE QUESTION BTN */}
+                  <button
+                    className="delete"
+                    id="btn"
+                    onClick={() => {
+                      handleDelete(elm.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                  {/* EDIT QUESTION BTN */}
+                  <button
+                    className="edit"
+                    id="btn"
+                    onClick={() => {
+                      handleEditQuiz(elm.id);
+                    }}
+                  >
+                    Edit
+                  </button>
+
+                  {/* INPUTS TO ANSWER A QUESTION */}
+                  
+                </div>
+              );
+                })
+              }
+          </div>
+        ) : null}
       </div>
     </>
   );
