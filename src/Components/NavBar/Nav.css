@@ -1,0 +1,62 @@
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F8F9F9;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    padding: 10px;
+}
+
+.logo_about{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 60px;
+    gap: 50px;
+}
+
+.logoBtn{
+    border-style: none;
+    background-color: transparent;
+    padding: 5px;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+span{
+    font-weight: 700;
+}
+
+.aboutBtn{
+    border-style: none;
+    background-color: transparent;
+    font-size: 1rem;
+    padding-top: 6px;
+    cursor: pointer;
+}
+
+input[type="search"]{
+    width: 600px;
+    padding: 8px;
+    border-radius: 4px;
+    border-style: 1px solid #E1ECF4;
+    outline: #E1ECF4;
+}
+
+.logIn{
+    margin: 0 35px 0 0;
+    padding: 10px 25px 10px 25px;
+    border-style: none;
+    background-color: #E1ECF4;
+    color: #28333b;
+    cursor: pointer;
+
+}
+
+.signUp{
+    margin: 0 60px 0 0;
+    padding: 10px 25px 10px 25px;
+    border-style: none;
+    background-color: #0A95FF;
+    color: #ECF7FF;
+    cursor: pointer;
+}

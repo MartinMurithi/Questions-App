@@ -1,0 +1,99 @@
+
+.titleText{
+    color:#232629;
+    font-size: 1.5rem;
+    line-height: 35px;
+    margin: 24px 0px 27px;
+    font-weight: 600;
+}
+
+.guideDiv{
+    background-color: #EBF4FB;
+    border: 1px solid #A6CEED;
+    margin: 60px 40px;
+    padding: 25px;
+    width: 70%;
+    color:#3B4045;
+}
+
+.guideTitle{
+    font-size: 1.1rem;
+    line-height: 27px;
+    font-weight: 400;
+}
+
+.guideIntro{
+    font-size: 0.9rem;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.guideListTitle{
+    font-size: 0.8rem;
+    line-height: 17px;
+    font-weight: 800;
+    margin:10px 0px 10px 0px;
+}
+
+ul{
+    list-style-type: circle;
+    margin-left: 30px;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    width: 70%;
+}
+
+.authorName{
+    padding: 8px;
+    border-style: none;
+    border: 1px solid #BABFC4;
+    outline: #59A4DE;
+}
+
+.authorName::placeholder{
+    padding: 3px;
+}
+
+.quizBox{
+    border-style: none;
+    border: 1px solid #BABFC4;
+    outline: #59A4DE;
+    margin-top: 20px;
+}
+
+.quizBox::placeholder{
+    padding: 3px;
+}
+
+.btns{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 40px 30px 40px;
+}
+
+.cancelBtn{
+    padding: 8px 20px;
+    background-color: #FDF7E2;
+    border: 1px solid #838080;
+    cursor: pointer;
+}
+
+.postBtn{
+    background-color: #0A95FF;
+    cursor: pointer;
+    padding: 8px 20px;
+    color: #fff;
+    border-style: none;
+    border-radius: 3px;
+}
+
+.empty{
+    width: 400px;
+    height: 400px;
+}
+
